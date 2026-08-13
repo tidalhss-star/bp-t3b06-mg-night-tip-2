@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/2) · t3b06-mg-night-tip-2</title>
+  <meta name="description" content="t3b06-mg-night-tip-2에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://magok-club-hot.node-link.shop/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+ /* ===== RESET & BASE ===== */
+ *, *::before, *::after {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+ html {
+ scroll-behavior: smooth;
+ font-size: 16px;
+ }
+ body {
+ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+ background-color: #1a1a1a;
+ color: #e5e5e5;
+ line-height: 1.4;
+ -webkit-font-smoothing: antialiased;
+ overflow-x: hidden;
+ }
+
+ /* ===== TYPOGRAPHY ===== */
+ h1, h2, h3, h4 {
+ font-family: 'Impact', 'Arial Black', 'Franklin Gothic Bold', system-ui, sans-serif;
+ font-weight: 900;
+ letter-spacing: -0.02em;
+ text-transform: uppercase;
+ color: #ff6b35;
+ }
+ h1 {
+ font-size: clamp(3rem, 12vw, 6rem);
+ line-height: 0.9;
+ }
+ h2 {
+ font-size: clamp(2.2rem, 8vw, 4.5rem);
+ line-height: 0.95;
+ border-left: 6px solid #ff6b35;
+ padding-left: 24px;
+ margin-bottom: 24px;
+ }
+ h3 {
+ font-size: clamp(1.5rem, 5vw, 2.8rem);
+ line-height: 1;
+ }
+ p, li, .text-block {
+ font-size: 1.15rem;
+ line-height: 1.5;
+ max-width: 70ch;
+ }
+ a {
+ color: #ff6b35;
+ text-decoration: none;
+ border-bottom: 3px solid transparent;
+ transition: border-color 0.2s, color 0.2s;
+ }
+ a:hover, a:focus {
+ border-bottom-color: #ff6b35;
+ color: #fff;
+ }
+
+ /* ===== LAYOUT ===== */
+ .container {
+ padding: 48px 48px;
+ max-width: none !important;
+ width: 100%;
+ }
+ section {
+ padding: 80px 48px;
+ border-top: 4px solid #ff6b35;
+ }
+ .grid-2 {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 32px;
+ }
+ .grid-3 {
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+ gap: 32px;
+ }
+ .flex-between {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 32px;
+ }
+ .overlap-box {
+ position: relative;
+ margin-left: -48px;
+ margin-right: -48px;
+ }
+ .asymmetric-right {
+ margin-right: -120px;
+ }
+ .rotate-neg-1 {
+ transform: rotate(-1.5deg);
+ }
+ .rotate-pos-1 {
+ transform: rotate(1.8deg);
+ }
+ .skewed {
+ transform: skewX(-4deg);
+ }
+ .skewed > * {
+ transform: skewX(4deg);
+ }
+
+ /* ===== BORDERS & TEXTURES ===== */
+ .brutal-border {
+ border: 4px solid #ff6b35;
+ padding: 24px;
+ }
+ .brutal-border-thin {
+ border: 2px solid #e5e5e5;
+ padding: 16px;
+ }
+ .bg-texture {
+ background-image: 
+ repeating-linear-gradient(
+ 0deg,
+ transparent,
+ transparent 20px,
+ rgba(255, 107, 53, 0.08) 20px,
+ rgba(255, 107, 53, 0.08) 21px
+ ),
+ repeating-linear-gradient(
+ 90deg,
+ transparent,
+ transparent 20px,
+ rgba(255, 107, 53, 0.05) 20px,
+ rgba(255, 107, 53, 0.05) 21px
+ );
+ }
+ .noise-bg {
+ background-color: #1a1a1a;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+ background-repeat: repeat;
+ }
+
+ /* ===== HEADER & NAV ===== */
+ header {
+ padding: 32px 48px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background: #1a1a1a;
+ border-bottom: 4px solid #ff6b35;
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ }
+ .logo {
+ font-family: 'Impact', 'Arial Black', sans-serif;
+ font-size: 2.4rem;
+ letter-spacing: -0.04em;
+ color: #ff6b35;
+ line-height: 1;
+ border: none;
+ }
+ .logo span {
+ display: block;
+ font-size: 0.8rem;
+ color: #e5e5e5;
+ letter-spacing: 0.2em;
+ font-family: system-ui, sans-serif;
+ font-weight: 300;
+ }
+ nav {
+ display: flex;
+ align-items: center;
+ gap: 32px;
+ }
+ nav a {
+ font-weight: 700;
+ text-transform: uppercase;
+ font-size: 1rem;
+ letter-spacing: 0.08em;
+ border: none;
+ padding: 8px 0;
+ position: relative;
+ }
+ nav a::after {
+ content: '';
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+ height: 3px;
+ background: #ff6b35;
+ transform: scaleX(0);
+ transform-origin: right;
+ transition: transform 0.3s;
+ }
+ nav a:hover::after {
+ transform: scaleX(1);
+ transform-origin: left;
+ }
+ .hamburger {
+ display: none;
+ flex-direction: column;
+ gap: 6px;
+ background: transparent;
+ border: none;
+ cursor: pointer;
+ padding: 8px;
+ }
+ .hamburger span {
+ display: block;
+ width: 32px;
+ height: 4px;
+ background: #ff6b35;
+ transition: all 0.3s;
+ }
+ .hamburger.active span:nth-child(1) {
+ transform: rotate(45deg) translate(6px, 6px);
+ }
+ .hamburger.active span:nth-child(2) {
+ opacity: 0;
+ }
+ .hamburger.active span:nth-child(3) {
+ transform: rotate(-45deg) translate(6px, -6px);
+ }
+ .mobile-nav {
+ display: none;
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 100vh;
+ background: #1a1a1a;
+ z-index: 999;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 48px;
+ padding: 48px;
+ border: 8px solid #ff6b35;
+ }
+ .mobile-nav a {
+ font-size: 2.5rem;
+ color: #e5e5e5;
+ font-family: 'Impact', 'Arial Black', sans-serif;
+ text-transform: uppercase;
+ border: none;
+ }
+ .mobile-nav.open {
+ display: flex;
+ }
+
+ /* ===== HERO ===== */
+ #hero {
+ padding-top: 120px;
+ padding-bottom: 120px;
+ position: relative;
+ overflow: hidden;
+ min-height: 80vh;
+ display: flex;
+ align-items: center;
+ }
+ #hero::before {
+ content: '';
+ position: absolute;
+ top: -60px;
+ right: -80px;
+ width: 500px;
+ height: 500px;
+ background: repeating-linear-gradient(
+ 45deg,
+ transparent,
+ transparent 30px,
+ rgba(255, 107, 53, 0.12) 30px,
+ rgba(255, 107, 53, 0.12) 31px
+ );
+ transform: rotate(15deg);
+ z-index: 0;
+ border: 4px solid #ff6b35;
+ }
+ #hero .hero-content {
+ position: relative;
+ z-index: 1;
+ max-width: 100%;
+ }
+ .hero-tagline {
+ display: inline-block;
+ background: #ff6b35;
+ color: #1a1a1a;
+ padding: 8px 24px;
+ font-weight: 800;
+ font-size: 0.9rem;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ margin-bottom: 24px;
+ transform: rotate(-2deg);
+ }
+ .hero-highlight {
+ background: #ff6b35;
+ color: #1a1a1a;
+ padding: 0 12px;
+ display: inline-block;
+ }
+ .hero-cta {
+ display: inline-block;
+ margin-top: 48px;
+ background: #ff6b35;
+ color: #1a1a1a;
+ font-weight: 900;
+ font-size: 1.6rem;
+ padding: 20px 48px;
+ text-transform: uppercase;
+ border: 4px solid #e5e5e5;
+ transition: all 0.2s;
+ transform: rotate(0.5deg);
+ }
+ .hero-cta:hover {
+ background: #1a1a1a;
+ color: #ff6b35;
+ border-color: #ff6b35;
+ transform: rotate(-1deg);
+ }
+
+ /* ===== CARDS ===== */
+ .card {
+ background: #1a1a1a;
+ border: 4px solid #e5e5e5;
+ padding: 32px;
+ transition: border-color 0.2s, transform 0.2s;
+ position: relative;
+ }
+ .card:hover {
+ border-color: #ff6b35;
+ transform: translate(-3px, -3px);
+ }
+ .card .star {
+ color: #ff6b35;
+ font-size: 1.6rem;
+ }
+ .card .meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 16px;
+ font-size: 0.85rem;
+ color: #999;
+ }
+ .card .author {
+ font-weight: 700;
+ color: #e5e5e5;
+ }
+ .card blockquote {
+ font-style: normal;
+ font-size: 1.1rem;
+ border-left: 4px solid #ff6b35;
+ padding-left: 16px;
+ }
+ .review-card {
+ border-color: #ff6b35;
+ background: rgba(255, 107, 53, 0.05);
+ }
+ .review-card .quote-mark {
+ font-size: 4rem;
+ line-height: 0.6;
+ color: #ff6b35;
+ font-family: Impact, sans-serif;
+ }
+
+ /* ===== FEATURES ===== */
+ .feature-icon {
+ font-size: 3.5rem;
+ line-height: 1;
+ margin-bottom: 8px;
+ display: block;
+ }
+ .step-number {
+ font-family: Impact, sans-serif;
+ font-size: 4rem;
+ color: #ff6b35;
+ line-height: 0.8;
+ margin-bottom: 8px;
+ }
+
+ /* ===== PHONE NUMBER (big visual) ===== */
+ .phone-block {
+ background: #ff6b35;
+ padding: 48px;
+ text-align: center;
+ border: 4px solid #e5e5e5;
+ margin-top: 40px;
+ transform: rotate(-0.5deg);
+ }
+ .phone-block a {
+ font-family: Impact, 'Arial Black', sans-serif;
+ font-size: clamp(2.5rem, 7vw, 4.5rem);
+ color: #1a1a1a;
+ border: none;
+ letter-spacing: 0.02em;
+ display: block;
+ }
+ .phone-block a:hover {
+ color: #e5e5e5;
+ text-decoration: underline;
+ }
+ .phone-block small {
+ font-size: 1rem;
+ color: #1a1a1a;
+ opacity: 0.8;
+ display: block;
+ margin-top: 8px;
+ font-weight: 600;
+ }
+
+ /* ===== FOOTER ===== */
+ footer {
+ padding: 64px 48px 32px;
+ border-top: 4px solid #ff6b35;
+ background: #111;
+ }
+ footer .copyright {
+ font-size: 0.85rem;
+ color: #666;
+ margin-top: 32px;
+ letter-spacing: 0.05em;
+ }
+
+ /* ===== RESPONSIVE ===== */
+ @media (max-width: 768px) {
+ .container {
+ padding: 24px 24px;
+ }
+ section {
+ padding: 60px 24px;
+ }
+ header {
+ padding: 24px 24px;
+ }
+ .grid-2, .grid-3 {
+ grid-template-columns: 1fr;
+ }
+ h1 {
+ font-size: 2.8rem;
+ }
+ .asymmetric-right {
+ margin-right: 0;
+ }
+ .overlap-box {
+ margin-left: 0;
+ margin-right: 0;
+ }
+ .hamburger {
+ display: flex;
+ }
+ nav.desktop-nav {
+ display: none;
+ }
+ .mobile-nav.open {
+ display: flex;
+ }
+ #hero {
+ padding-top: 80px;
+ padding-bottom: 80px;
+ min-height: auto;
+ }
+ #hero::before {
+ width: 300px;
+ height: 300px;
+ top: -30px;
+ right: -40px;
+ }
+ .hero-cta {
+ font-size: 1.2rem;
+ padding: 16px 32px;
+ }
+ .phone-block {
+ padding: 32px 24px;
+ }
+ .phone-block a {
+ font-size: 2rem;
+ }
+ footer {
+ padding: 48px 24px 24px;
+ }
+ }
+
+ @media (max-width: 480px) {
+ .container {
+ padding: 16px;
+ }
+ section {
+ padding: 48px 16px;
+ }
+ header {
+ padding: 16px;
+ }
+ h1 {
+ font-size: 2.2rem;
+ }
+ .logo {
+ font-size: 1.8rem;
+ }
+ .card {
+ padding: 20px;
+ }
+ .phone-block a {
+ font-size: 1.6rem;
+ }
+ }
+
+ /* ===== ACCESSIBILITY ===== */
+ @media (prefers-reduced-motion: reduce) {
+ *, *::before, *::after {
+ transition-duration: 0.01ms !important;
+ animation-duration: 0.01ms !important;
+ }
+ }
+ :focus-visible {
+ outline: 4px solid #ff6b35;
+ outline-offset: 4px;
+ }
+ ::selection {
+ background: #ff6b35;
+ color: #1a1a1a;
+ }
+
+ /* ===== UTILITY ===== */
+ .mb-32 { margin-bottom: 32px; }
+ .mt-48 { margin-top: 48px; }
+ .text-accent { color: #ff6b35; }
+ .text-white { color: #e5e5e5; }
+ .bg-dark { background: #1a1a1a; }
+ .bg-accent { background: #ff6b35; color: #1a1a1a; }
+ .text-center { text-align: center; }
+ .full-bleed { width: 100vw; margin-left: calc(-50vw + 50%); }
+ .border-accent { border-color: #ff6b35; }
+ .no-border { border: none; }
+ .hidden { display: none; }
+ </style>
+  <meta property="og:title" content="글 목록 (2/2) · t3b06-mg-night-tip-2">
+  <meta property="og:description" content="t3b06-mg-night-tip-2에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://magok-club-hot.node-link.shop/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header>
+ <a href="/" class="logo" aria-label="홈으로 이동">
+ 마곡유흥
+ <span>BRO TIP · T3B06</span>
+ </a>
+ <nav class="desktop-nav" aria-label="메인 네비게이션">
+ <a href="#reviews">찐후기</a>
+ <a href="#tips">꿀팁</a>
+ <a href="#contact">상담</a>
+ </nav>
+ <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기" aria-expanded="false">
+ <span></span>
+ <span></span>
+ <span></span>
+ </button>
+ </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 39개 · 2/2 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0079.html">마곡 유흥 꿀팁 활용 전 연남 클럽 추천정보 예약 실패 사례</a>
+        <p class="post-item__summary">마곡 유흥 꿀팁을 익히며 여가 시간을 계획하는 분들이 자주 범하는 실수는 사전 예약 절차를 간과하는 것입니다. 특히 연남동 일대의 클럽들은 유동 인구가 많아 무작정 방문했다가는 낭패를 보기 십상입니</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0080.html">마곡 유흥 꿀팁 적용 합정 셔츠룸 추천정보 방문 시 접근성 체크</a>
+        <p class="post-item__summary">마곡 유흥 꿀팁을 활용해 새로운 여가처를 찾을 때 가장 중요한 지표 중 하나는 바로 위치와 접근성입니다. 특히 합정 지역 셔츠룸을 방문할 계획이라면 대중교통 이용 여부와 주차 가능 여부를 방문 전에</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0081.html">마곡 유흥 꿀팁: 공덕 가라오케 초행자 주의점</a>
+        <p class="post-item__summary">처음으로 공덕 지역의 가라오케를 방문하는 경우, 기대감과 함께 약간의 긴장감이 앞설 수 있습니다. 특히 유흥가라는 낯선 환경에 익숙하지 않다면, 예상치 못한 상황에 당황할 수도 있습니다. 이러한 초</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0082.html">마곡 유흥 꿀팁 확인하고 상수 마사지 추천정보 활용하기</a>
+        <p class="post-item__summary">흔히들 특정 지역의 정보를 찾는 과정에서 유흥만을 목적으로 삼는다는 오해를 하곤 합니다. 하지만 마곡 유흥 꿀팁을 검색하는 많은 분이 사실은 일상의 피로를 풀기 위한 건전한 휴식처를 찾고 있다는 점</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0083.html">마곡 유흥 꿀팁: 망원 노래방 인원별 최적화 팁</a>
+        <p class="post-item__summary">망원동에서 노래방을 즐길 때, 함께하는 사람들의 인원수는 즐거운 경험을 좌우하는 중요한 요소입니다. 적절한 규모의 노래방을 선택하고, 각 인원에 맞는 최적의 환경을 조성하는 것이 중요합니다. 몇 가</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0084.html">마곡 유흥 꿀팁: 홍대 노래방 업체 비교의 핵심 기준</a>
+        <p class="post-item__summary">홍대에서 노래방을 찾으실 때, 어떤 기준으로 업체를 비교해야 만족스러운 선택을 할 수 있을까요? 단순히 가격만으로 결정하기보다는 몇 가지 핵심 기준을 통해 나에게 맞는 최적의 장소를 찾아야 합니다.</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0085.html">마곡 유흥 꿀팁 활용해 공덕 셔츠룸 추천정보 확인하는 절차</a>
+        <p class="post-item__summary">주말 저녁 모임 장소를 고민할 때 마곡 유흥 꿀팁 데이터를 참조하면 인근 지역의 특색을 파악하는 데 큰 도움이 됩니다. 특히 공덕 지역으로 이동할 계획이 있다면 해당 상권의 운영 방식을 미리 숙지하</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0086.html">마곡 유흥 꿀팁 기반의 연남 유흥 추천정보 비교 및 가격 판단 기준</a>
+        <p class="post-item__summary">익숙한 마곡 유흥 꿀팁 정보를 활용하다 보면 자연스럽게 주변 지역으로 관심이 확장됩니다. 최근 연남 지역의 유흥 문화를 궁금해하는 사람들이 많아지면서 가격대의 합리성을 따지는 안목이 무엇보다 중요해</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0087.html">마곡 유흥 꿀팁 활용 시 마곡 가라오케 추천정보 예약 과정에서의 실수 예방</a>
+        <p class="post-item__summary">많은 이들이 즐거운 밤을 기대하며 마곡 유흥 꿀팁을 검색하지만, 정작 중요한 예약 과정에서 사소한 실수로 계획이 어긋나는 경우가 빈번합니다. 특히 가라오케 방문 시 발생하는 초반의 실수를 피하는 것</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0088.html">마곡 유흥 꿀팁 활용으로 확인하는 마곡 유흥 추천정보 위치 및 접근성</a>
+        <p class="post-item__summary">마곡 지역의 밤 문화를 제대로 즐기기 위해서는 마곡 유흥 꿀팁에서 강조하는 몇 가지 항목을 체크리스트로 만들어 관리하는 것이 효과적입니다. 그중에서도 많은 이용객이 놓치는 부분이 바로 위치 선정과 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/interview-001-l6yziy.html">마곡 유흥 꿀팁 경험자에게 물어본 현실적인 판단 기준</a>
+        <p class="post-item__summary">마곡 지구는 최근 대규모 기업 단지가 들어서면서 유동 인구가 급격히 늘어난 지역입니다. 이에 따라 다양한 유흥 문화가 형성되고 있으나 정보의 비대칭성이 심해 시행착오를 겪는 경우가 많습니다. 만족스</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/interview-002-1n0fwwc.html">관점이야기</a>
+        <p class="post-item__summary">백링크 지시: 본문 내러티브 속에서 다음 링크를 자연스러운 발견으로 녹여라:구글 봇 정밀 검진 및 크롤 버짓 밀착 간호</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-1.html">마곡 유흥 꿀팁</a>
+        <p class="post-item__summary">서울 서초구에 위치한 마곡은 최근 다양한 문화 및 오락 시설이 조성되면서 지역 내 유흥 환경이 점차 다양화되고 있습니다. 이 지역은 업무 단지와 주거지가 혼재되어 있어, 직장인들과 지역 주민 모두에</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-2.html">마곡 유흥 꿀팁과 예산 계획</a>
+        <p class="post-item__summary">마곡 지역의 유흥 문화를 이용할 때 가장 중요한 것은 사전에 비용을 명확히 계획하는 것입니다. 여러 곳에서 다양한 옵션이 제공되지만, 각 업소의 기본 정책과 추가 비용이 발생할 수 있는 항목들을 미</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/myth-001-1n0fwwc.html">마곡 유흥 초보가 가장 많이 하는 실수와 대처법</a>
+        <p class="post-item__summary">마곡 쪽으로 유흥 즐기러 오는 사람들 보면 기본적으로 준비가 안 된 경우가 많다. 그냥 아무 데나 들어가서 적당히 놀다 나오면 되겠지 생각하는데 그게 가장 위험한 발상이다. 여기는 상권 특성상 기업</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-1.html">마곡 유흥 꿀팁: 연남 마사지 추천정보 연결 가이드</a>
+        <p class="post-item__summary">마곡 지역을 방문하여 여가 시간을 즐기고자 할 때, 다양한 정보 중에서도 신뢰할 수 있는 팁을 찾는 것은 중요합니다. 특히나 특정 업종의 정보를 검색하실 때는 정확한 키워드와 함께 관련 사이트의 신</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-2.html">마곡 유흥 꿀팁 안내</a>
+        <p class="post-item__summary">마곡 지역은 다양한 유흥 시설이 밀집되어 있어 처음 방문하는 이들이 어떻게 접근해야 할지 막막해하는 경우가 많습니다. 적합한 장소를 선택할 때는 여러 가지 요소를 꼼꼼히 비교하는 것이 중요하며, 사</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-3.html">마곡 유흥 꿀팁</a>
+        <p class="post-item__summary">마곡 지역의 유흥 문화를 이용하고자 할 때, 사전에 예산을 명확히 설정하는 것은 매우 중요합니다. 비용 관리가 적절히 이루어지지 않으면 예상치 못한 지출로 이어질 수 있으므로, 방문 전에 필요한 금</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/t3link-002-l6yziy.html">마곡 유흥 꿀팁 관련 추천 정보</a>
+        <p class="post-item__summary">최근 서울 서부권의 새로운 중심지로 급부상한 마곡 지역은 깔끔한 도시 계획과 세련된 건물들이 밀집해 있어 밤문화 역시 매우 쾌적하고 체계적으로 발달해 있습니다. 대기업 연구 단지와 다양한 기업들이 </p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
